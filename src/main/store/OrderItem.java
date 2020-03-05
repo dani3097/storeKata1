@@ -30,7 +30,8 @@ public class OrderItem {
 			discount = accessoriesDiscount.calculateDiscountForAccessories(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			discount = calculateDiscountForBikes();
+			BikesDiscount bikesDiscount=new BikesDiscount();
+			discount = bikesDiscount.calculateDiscountForBikes(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Cloathing) {
 			discount = calculateDiscountForCloathing();
@@ -47,10 +48,7 @@ public class OrderItem {
 		return cloathingDiscount;
 	}
 
-	private float calculateDiscountForBikes() {
 	
-		return calculateTotalAmount() * 20 / 100;
-	}
 
 	
 
