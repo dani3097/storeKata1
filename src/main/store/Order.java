@@ -53,16 +53,19 @@ public class Order {
 	}
 
 	public float total() {
+		float totalItems = calculateTotalForItems();
+		float tax = calculateTax(totalItems);
+		int shipping = calculatShipping();
+		return totalItems + tax + shipping;
+	}
+
+	private float calculateTotalForItems() {
 		float totalItems = 0;
 		for (OrderItem item : items) {
 			float totalItem = calculateTotalFor(item);
 			totalItems += totalItem;
 		}
-
-		int shipping = calculatShipping();
-
-		// total=totalItemst + tax + 15 shipping
-		return totalItems + calculateTax(totalItems) + shipping;
+		return totalItems;
 	}
 
 	private int calculatShipping() {
