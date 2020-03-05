@@ -59,13 +59,19 @@ public class Order {
 			totalItems += totalItem;
 		}
 
-		if (this.deliveryCountry == "USA"){
-			// total=totalItems + tax + 0 shipping
-			return totalItems + calculateTax(totalItems);
-		}
+		int shipping = calculatShipping();
 
 		// total=totalItemst + tax + 15 shipping
-		return totalItems + calculateTax(totalItems) + 15;
+		return totalItems + calculateTax(totalItems) + shipping;
+	}
+
+	private int calculatShipping() {
+		int shipping = 15;
+		if (this.deliveryCountry == "USA"){
+			// total=totalItems + tax + 0 shipping
+			return 0;
+		}
+		return shipping;
 	}
 
 	private float calculateTax(float totalItems) {
