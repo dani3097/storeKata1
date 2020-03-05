@@ -26,8 +26,8 @@ public class OrderItem {
 		float discount=0;
 
 		if (getProduct().getCategory() == ProductCategory.Accessories) {
-			AccessoriesDiscount accessoriesDiscount =new AccessoriesDiscount();
-			discount = accessoriesDiscount.calculateDiscountForAccessories(this);
+			DiscountCalculator accessoriesDiscount =new AccessoriesDiscount();
+			discount = accessoriesDiscount.calculateDiscount(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Bikes) {
 			BikesDiscount bikesDiscount=new BikesDiscount();
