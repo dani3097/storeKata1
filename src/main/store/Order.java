@@ -52,31 +52,38 @@ public class Order {
 		return items;
 	}
 
-	public float calculateTotal() {
-		float totalItems = calculateTotalForItems();
-		float tax = calculateTax(totalItems);
-		int shipping = calculatShipping();
-		return totalItems + tax + shipping;
-	}
-
-	private float calculateTotalForItems() {
+	public float total() {
 		float totalItems = 0;
 		for (OrderItem item : items) {
-			float totalItem = item.calculateTotalForItem();
+			float totalItem=0;
+			float itemAmount = item.getProduct().getUnitPrice() * item.getQuantity();
+			if (item.getProduct().getCategory() == ProductCategory.Accessories) {
+				float booksDiscount = 0;
+				if (itemAmount >= 100) {
+					booksDiscount = itemAmount * 10 / 100;
+				}
+				totalItem = itemAmount - booksDiscount;
+			}
+			if (item.getProduct().getCategory() == ProductCategory.Bikes) {
+				// 20% discount for Bikes
+				totalItem = itemAmount - itemAmount * 20 / 100;
+			}
+			if (item.getProduct().getCategory() == ProductCategory.Cloathing) {
+				float cloathingDiscount = 0;
+				if (item.getQuantity() > 2) {
+					cloathingDiscount = item.getProduct().getUnitPrice();
+				}
+				totalItem = itemAmount - cloathingDiscount;
+			}
 			totalItems += totalItem;
 		}
-		return totalItems;
-	}
 
-	private int calculatShipping() {
-		int shipping = 15;
 		if (this.deliveryCountry == "USA"){
-			return 0;
+			// total=totalItems + tax + 0 shipping
+			return totalItems + totalItems * 5 / 100;
 		}
-		return shipping;
-	}
 
-	private float calculateTax(float totalItems) {
-		return totalItems * 5 / 100;
+		// total=totalItemst + tax + 15 shipping
+		return totalItems + totalItems * 5 / 100 + 15;
 	}
 }

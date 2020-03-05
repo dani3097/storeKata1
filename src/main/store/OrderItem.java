@@ -20,28 +20,4 @@ public class OrderItem {
 	public int getQuantity() {
 		return quantity;
 	}
-
-	float calculateTotalForItem() {
-		float totalItem=0;
-		float discount=0;
-
-		if (getProduct().getCategory() == ProductCategory.Accessories) {
-			DiscountCalculator accessoriesDiscount =new AccessoriesDiscount();
-			discount = accessoriesDiscount.calculateDiscount(this);
-		}
-		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			DiscountCalculator bikesDiscount=new BikesDiscount();
-			discount = bikesDiscount.calculateDiscount(this);
-		}
-		if (getProduct().getCategory() == ProductCategory.Cloathing) {
-			DiscountCalculator cloathingDiscount =new CloathingDiscount();
-			discount = cloathingDiscount.calculateDiscount(this);
-		}
-		totalItem= calculateTotalAmount()-discount;
-		return totalItem;
-	}
-
-	float calculateTotalAmount() {
-		return getProduct().getUnitPrice() * getQuantity();
-	}
 }
