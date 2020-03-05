@@ -52,7 +52,7 @@ public class Order {
 		return items;
 	}
 
-	public float total() {
+	public float calculateTotal() {
 		float totalItems = calculateTotalForItems();
 		float tax = calculateTax(totalItems);
 		int shipping = calculatShipping();
@@ -62,7 +62,7 @@ public class Order {
 	private float calculateTotalForItems() {
 		float totalItems = 0;
 		for (OrderItem item : items) {
-			float totalItem = item.calculateTotalFor();
+			float totalItem = item.calculateTotalForItem();
 			totalItems += totalItem;
 		}
 		return totalItems;
