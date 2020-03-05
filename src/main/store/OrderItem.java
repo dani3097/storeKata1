@@ -27,8 +27,7 @@ public class OrderItem {
 			totalItem = calculateDiscountForAccessories();
 		}
 		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			// 20% discount for Bikes
-			totalItem = calculateTotalAmount() - calculateTotalAmount() * 20 / 100;
+			totalItem = calculateDiscountForBikes();
 		}
 		if (getProduct().getCategory() == ProductCategory.Cloathing) {
 			float cloathingDiscount = 0;
@@ -37,6 +36,13 @@ public class OrderItem {
 			}
 			totalItem = calculateTotalAmount() - cloathingDiscount;
 		}
+		return totalItem;
+	}
+
+	private float calculateDiscountForBikes() {
+		float totalItem;
+		// 20% discount for Bikes
+		totalItem = calculateTotalAmount() - calculateTotalAmount() * 20 / 100;
 		return totalItem;
 	}
 
