@@ -24,11 +24,7 @@ public class OrderItem {
 	float calculateTotalForItem() {
 		float totalItem=0;
 		if (getProduct().getCategory() == ProductCategory.Accessories) {
-			float booksDiscount = 0;
-			if (calculateTotalAmount() >= 100) {
-				booksDiscount = calculateTotalAmount() * 10 / 100;
-			}
-			totalItem = calculateTotalAmount() - booksDiscount;
+			totalItem = calculateDiscountForAccessories();
 		}
 		if (getProduct().getCategory() == ProductCategory.Bikes) {
 			// 20% discount for Bikes
@@ -41,6 +37,16 @@ public class OrderItem {
 			}
 			totalItem = calculateTotalAmount() - cloathingDiscount;
 		}
+		return totalItem;
+	}
+
+	private float calculateDiscountForAccessories() {
+		float totalItem;
+		float booksDiscount = 0;
+		if (calculateTotalAmount() >= 100) {
+			booksDiscount = calculateTotalAmount() * 10 / 100;
+		}
+		totalItem = calculateTotalAmount() - booksDiscount;
 		return totalItem;
 	}
 
