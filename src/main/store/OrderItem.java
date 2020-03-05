@@ -34,19 +34,14 @@ public class OrderItem {
 			discount = bikesDiscount.calculateDiscountForBikes(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Cloathing) {
-			discount = calculateDiscountForCloathing();
+			CloathingDiscount cloathingDiscount =new CloathingDiscount();
+			discount = cloathingDiscount.calculateDiscountForCloathing(this);
 		}
 		totalItem= calculateTotalAmount()-discount;
 		return totalItem;
 	}
 
-	private float calculateDiscountForCloathing() {
-		float cloathingDiscount = 0;
-		if (getQuantity() > 2) {
-			cloathingDiscount = getProduct().getUnitPrice();
-		}
-		return cloathingDiscount;
-	}
+	
 
 	
 
