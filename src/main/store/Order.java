@@ -62,7 +62,7 @@ public class Order {
 	private float calculateTotalForItems() {
 		float totalItems = 0;
 		for (OrderItem item : items) {
-			float totalItem = calculateTotalFor(item);
+			float totalItem = item.calculateTotalFor();
 			totalItems += totalItem;
 		}
 		return totalItems;
@@ -71,7 +71,6 @@ public class Order {
 	private int calculatShipping() {
 		int shipping = 15;
 		if (this.deliveryCountry == "USA"){
-			// total=totalItems + tax + 0 shipping
 			return 0;
 		}
 		return shipping;
@@ -79,29 +78,5 @@ public class Order {
 
 	private float calculateTax(float totalItems) {
 		return totalItems * 5 / 100;
-	}
-
-	private float calculateTotalFor(OrderItem item) {
-		float totalItem=0;
-		float itemAmount = item.getProduct().getUnitPrice() * item.getQuantity();
-		if (item.getProduct().getCategory() == ProductCategory.Accessories) {
-			float booksDiscount = 0;
-			if (itemAmount >= 100) {
-				booksDiscount = itemAmount * 10 / 100;
-			}
-			totalItem = itemAmount - booksDiscount;
-		}
-		if (item.getProduct().getCategory() == ProductCategory.Bikes) {
-			// 20% discount for Bikes
-			totalItem = itemAmount - itemAmount * 20 / 100;
-		}
-		if (item.getProduct().getCategory() == ProductCategory.Cloathing) {
-			float cloathingDiscount = 0;
-			if (item.getQuantity() > 2) {
-				cloathingDiscount = item.getProduct().getUnitPrice();
-			}
-			totalItem = itemAmount - cloathingDiscount;
-		}
-		return totalItem;
 	}
 }
