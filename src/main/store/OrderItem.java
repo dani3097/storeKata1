@@ -30,8 +30,8 @@ public class OrderItem {
 			discount = accessoriesDiscount.calculateDiscount(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			BikesDiscount bikesDiscount=new BikesDiscount();
-			discount = bikesDiscount.calculateDiscountForBikes(this);
+			DiscountCalculator bikesDiscount=new BikesDiscount();
+			discount = bikesDiscount.calculateDiscount(this);
 		}
 		if (getProduct().getCategory() == ProductCategory.Cloathing) {
 			CloathingDiscount cloathingDiscount =new CloathingDiscount();
